@@ -80,14 +80,13 @@ from parsimonious.grammar import Grammar, NodeVisitor
 #     },
 # ]
 
-data = """
-A, art. ഒരു
-Aback, ad. പുറകൊട്ട, പിന്നൊക്കം
-Abaft, ad. പിമ്പുറത്തെക്ക, കപ്പലിൻറ അമരത്തെക്ക
-Abandon, v. a. വിട്ടൊഴിയുന്നു, ത്യജിക്കുന്നു, പരിത്യാഗം ചെയ്യുന്നു; ഉപെക്ഷിക്കുന്നു, കൈവിടുന്നു
-Abandoned, a. വിട്ടൊഴിയപ്പെട്ട,ത്യജിക്കപ്പെട്ട; ഉപെക്ഷിക്കപ്പെട്ട, കൈവിടപ്പെട്ട; മഹാ കെട്ട, ദുഷ്ടതയുള്ള, വഷളായുള്ള, മഹാ ചീത്ത
-"""
-
+# data = """
+# A, art. ഒരു
+# Aback, ad. പുറകൊട്ട, പിന്നൊക്കം
+# Abaft, ad. പിമ്പുറത്തെക്ക, കപ്പലിൻറ അമരത്തെക്ക
+# Abandon, v. a. വിട്ടൊഴിയുന്നു, ത്യജിക്കുന്നു, പരിത്യാഗം ചെയ്യുന്നു; ഉപെക്ഷിക്കുന്നു, കൈവിടുന്നു
+# Abandoned, a. വിട്ടൊഴിയപ്പെട്ട,ത്യജിക്കപ്പെട്ട; ഉപെക്ഷിക്കപ്പെട്ട, കൈവിടപ്പെട്ട; മഹാ കെട്ട, ദുഷ്ടതയുള്ള, വഷളായുള്ള, മഹാ ചീത്ത
+# """
 
 grammar = Grammar(
     r"""
@@ -165,6 +164,9 @@ class DictVisitor(NodeVisitor):
         return visited_children or node
 
 def main():
+    f = open("data/dictionary-full.txt", mode="r", encoding="utf-8")
+    data = f.read()
+
     tree = grammar.parse(data)
     dv = DictVisitor()
     output = dv.visit(tree)
